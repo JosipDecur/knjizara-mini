@@ -16,7 +16,7 @@ bool manjiod(double cijena)
 }
 bool pretrazivanje(string naziv[],unsigned long long int barkod[], double cijena[], string potraga,int brBarkodova)
 {
-
+    
     int br=0;
     for(int i=0;i<brBarkodova;i++)
     {
@@ -45,7 +45,7 @@ int main()
     datoteka.open("pravila.txt");
     datoteka << "Dobrodosli u model knjizare! Pravila koristenja ove knjizare su sljedeca: 1. Zabranjeni su neprimjereni nazivi knjiga. 2. Brisanje knjiga je funkcija implementirana samo za situacije u kojima se dogodi pogreska i ne smije ju se iskoristavati! 3. Kako bi uspjesno pretrazivali knjige morate dobro znati njihova imena, jer inace funkcija nece raditi! Hvala sto koristite nasu knjizaru!" << endl;
     datoteka.close();
-
+    
     while(1)
     {
         cout << "1. Unos nove knjige: " << endl;
@@ -79,7 +79,7 @@ int main()
             cout << "Unesite naziv knjige: " << endl;
             cin.ignore();
             getline(cin, naziv[brKnjige]);
-
+            
             cout << "Unesite cijenu knjige: " << endl;
             cin >> cijena[brKnjige];
             brKnjige++;
@@ -109,9 +109,8 @@ int main()
             }
         }
         else if (izbor==5)
-        {
-
-            cout<<"Unesite barkod knjige koji želite izbrisati: ";
+        {  
+            cout<<"Unesite barkod knjige koju zelite izbrisati: ";
             cin>>br;
             int h=0;
             for(int i=0;i<brKnjige;i++)
@@ -143,7 +142,7 @@ int main()
             cout << redak << endl;
             datoteka.close();
         }
-
+        
         else if(izbor==7)
         {
             cout<<"Izlaz iz programa."<<endl;
