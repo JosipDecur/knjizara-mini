@@ -65,20 +65,39 @@ int main()
                  cout<<barkod[i]<<", "<<naziv[i]<<", "<<cijena[i]<<endl;
         }
         else if(izbor==3)
-               {
-                   cout<<"Podatci za inventuru: "<<endl;
-                   cout<<"Suma svih cijena artikala: "<< accumulate(cijena, cijena+brKnjige, 0.0) <<endl;
-                   int min_index=min_element(cijena,cijena+brKnjige)-cijena;
-                   double mincij=cijena[min_index];
-                   cout<<"Artikl s najmanjom cijenom: "<< naziv[min_index] <<endl;
-                   for(int i=0; i<brKnjige; i++)
-                   {
-                       if(cijena[i]==mincij)
-                           brojac++;
-                   }
-                   cout<<"Broj artikala s najmanjom cijenom: "<<brojac<<endl;
-                   cout<<"Broj artikala s cijenom manjom od 500 kn: "<<count_if(cijena, cijena+brKnjige, manjiod)<<endl;
-               }
+        {
+             cout<<"Podatci za inventuru: "<<endl;
+             cout<<"Suma svih cijena knjiga: "<< accumulate(cijena, cijena+brKnjige, 0.0) <<endl;
+             int min_index=min_element(cijena,cijena+brKnjige)-cijena;
+             double mincij=cijena[min_index];
+             cout<<"Knjiga s najmanjom cijenom: "<< naziv[min_index] <<endl;
+             for(int i=0; i<brKnjige; i++)
+             {
+                  if(cijena[i]==mincij)
+                      brojac++;
+             }
+             cout<<"Broj knjige s najmanjom cijenom: "<<brojac<<endl;
+             cout<<"Broj knjige s cijenom manjom od 500 kn: "<<count_if(cijena, cijena+brKnjige, manjiod)<<endl;
+         }
+        else if(izbor==4)
+                {
+                    string pretraga;
+                    cout<<"Unesite naziv knjige koji pretrazujete."<<endl;
+                    cin.ignore();
+                    getline(cin, pretraga);
+                    for(int i=0; i<brojac; i++)
+                    {
+                        if(naziv[i]==pretraga)
+                        {
+                            cout<<"Knjiga koju trazite ima barkod."<<barkod[i]<<" i cijenu "<<cijena[i]<<endl;
+                            brojac++;
+                        }
+                    }
+                    if(brojac==0)
+                    {
+                        cout<<"Takava knjiga ne postoji."<<endl;
+                    }
+                }
     }
     return 0;
 }
