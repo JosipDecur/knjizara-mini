@@ -7,9 +7,17 @@
 
 using namespace std;
 
+bool manjiod(double cijena)
+{
+    if(cijena<500)
+        return true;
+    else
+        return false;
+}
+
 int main()
 {
-    int izbor;
+    int izbor, brojac=0;
     int brKnjige=0;
     unsigned long long int *barkod = new unsigned long long int[2000];
     string *naziv = new string[2000];
@@ -56,6 +64,21 @@ int main()
             for(int i=0; i<brKnjige; i++)
                  cout<<barkod[i]<<", "<<naziv[i]<<", "<<cijena[i]<<endl;
         }
+        else if(izbor==3)
+               {
+                   cout<<"Podatci za inventuru: "<<endl;
+                   cout<<"Suma svih cijena artikala: "<< accumulate(cijena, cijena+brKnjige, 0.0) <<endl;
+                   int min_index=min_element(cijena,cijena+brKnjige)-cijena;
+                   double mincij=cijena[min_index];
+                   cout<<"Artikl s najmanjom cijenom: "<< naziv[min_index] <<endl;
+                   for(int i=0; i<brKnjige; i++)
+                   {
+                       if(cijena[i]==mincij)
+                           brojac++;
+                   }
+                   cout<<"Broj artikala s najmanjom cijenom: "<<brojac<<endl;
+                   cout<<"Broj artikala s cijenom manjom od 500 kn: "<<count_if(cijena, cijena+brKnjige, manjiod)<<endl;
+               }
     }
     return 0;
 }
