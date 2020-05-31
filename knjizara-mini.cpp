@@ -14,10 +14,28 @@ bool manjiod(double cijena)
     else
         return false;
 }
+bool pretrazivanje(string naziv[],unsigned long long int barkod[], double cijena[], string potraga,int brBarkodova)
+{
+
+    int br=0;
+    for(int i=0;i<brBarkodova;i++)
+    {
+        if(naziv[i]==potraga)
+        {
+            br++;
+            cout<<"Naziv knjige je: "<<naziv[i]<<", barkod knjige je: "<<barkod[i]<<", cijena knjige je: "<<cijena[i]<<endl;
+        }
+        if(br==0)
+            return false;
+        else
+            return true;
+    }
+}
+
 
 int main()
 {
-    int izbor, brojac=0;
+    int izbor;
     int brKnjige=0;
     unsigned long long int *barkod = new unsigned long long int[2000];
     string *naziv = new string[2000];
@@ -55,6 +73,7 @@ int main()
             cout << "Unesite naziv knjige: " << endl;
             cin.ignore();
             getline(cin, naziv[brKnjige]);
+
             cout << "Unesite cijenu knjige: " << endl;
             cin >> cijena[brKnjige];
             brKnjige++;
@@ -62,42 +81,51 @@ int main()
         else if(izbor==2)
         {
             for(int i=0; i<brKnjige; i++)
-                 cout<<barkod[i]<<", "<<naziv[i]<<", "<<cijena[i]<<endl;
+                cout<<"Barkod knjige je: "<<barkod[i]<<", naziv knjige je: "<<naziv[i]<<", cijena knjige je: "<<cijena[i]<<endl;
         }
         else if(izbor==3)
         {
-             cout<<"Podatci za inventuru: "<<endl;
-             cout<<"Suma svih cijena knjiga: "<< accumulate(cijena, cijena+brKnjige, 0.0) <<endl;
-             int min_index=min_element(cijena,cijena+brKnjige)-cijena;
-             double mincij=cijena[min_index];
-             cout<<"Knjiga s najmanjom cijenom: "<< naziv[min_index] <<endl;
-             for(int i=0; i<brKnjige; i++)
-             {
-                  if(cijena[i]==mincij)
-                      brojac++;
-             }
-             cout<<"Broj knjige s najmanjom cijenom: "<<brojac<<endl;
-             cout<<"Broj knjige s cijenom manjom od 500 kn: "<<count_if(cijena, cijena+brKnjige, manjiod)<<endl;
-         }
+            cout<<"Zbroj svih cijena knjiga: "<<accumulate(cijena,cijena+brKnjige,0.0)<<endl;
+            int min_index=min_element(cijena,cijena+brKnjige)-cijena;
+            double najmanji=cijena[min_index];
+            cout<<"Naziv knjige koja ima najmanju cijenu: "<<naziv[min_index]<<endl;
+            cout<<"broj knjiga koje imaju cijenu manju od 500 kn: "<<count_if(cijena,cijena+brKnjige, manjiod)<<endl;
+        }
         else if(izbor==4)
+        {
+            string pretraga;
+            cout<<"Unesite naziv knjige koji pretrazujete:"<<endl;
+            cin.ignore();
+            getline(cin, pretraga);
+            if(pretrazivanje(naziv,barkod,cijena,pretraga,brKnjige)==false)
+            {
+                cout<<"Knjige nema";
+            }
+        }
+        else if(izbor==5)
+        {
+            int i;
+            unsigned long long int broj;
+            cout<<"Unesite barkod knjige koju zelite izbrisati: ";
+            cin>>broj;
+            for(i=0;i<=brKnjige;i++)
+            {
+                if(barkod[i]==broj)
                 {
-                    string pretraga;
-                    cout<<"Unesite naziv knjige koji pretrazujete."<<endl;
-                    cin.ignore();
-                    getline(cin, pretraga);
-                    for(int i=0; i<brojac; i++)
+                    for(int j=0;j<=brKnjige;j++)
                     {
-                        if(naziv[i]==pretraga)
-                        {
-                            cout<<"Knjiga koju trazite ima barkod."<<barkod[i]<<" i cijenu "<<cijena[i]<<endl;
-                            brojac++;
-                        }
-                    }
-                    if(brojac==0)
-                    {
-                        cout<<"Takva knjiga ne postoji."<<endl;
+                        barkod[j]=barkod[j+1];
+                        naziv[j]=naziv[j+1];
+                        cijena[j]=cijena[j+1];
                     }
                 }
+                brKnjige--;
+                break;
+            }
+            if(i==brKnjige)
+                cout<<"Knjige nema"<<endl;
+        }
+
         else if(izbor==7)
         {
             cout<<"Izlaz iz programa."<<endl;
