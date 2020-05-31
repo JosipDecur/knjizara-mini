@@ -16,7 +16,7 @@ int main()
     double *cijena = new double[2000];
     while(1)
     {
-        cout << "1. Unos novog knjige: " << endl;
+        cout << "1. Unos nove knjige: " << endl;
         cout << "2. Ispis svih podataka: " << endl;
         cout << "3. Inventura: " << endl;
         cout << "4. Pretraga prema nazivu knjige: " << endl;
@@ -50,6 +50,11 @@ int main()
             cout << "Unesite cijenu knjige: " << endl;
             cin >> cijena[brKnjige];
             brKnjige++;
+        }
+        else if(izbor==2)
+        {
+            for(int i=0; i<brKnjige; i++)
+                 cout<<barkod[i]<<", "<<naziv[i]<<", "<<cijena[i]<<endl;
         }
     }
     return 0;
