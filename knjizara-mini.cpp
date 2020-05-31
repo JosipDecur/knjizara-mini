@@ -95,9 +95,20 @@ int main()
                     }
                     if(brojac==0)
                     {
-                        cout<<"Takava knjiga ne postoji."<<endl;
+                        cout<<"Takva knjiga ne postoji."<<endl;
                     }
                 }
+        else if(izbor==7)
+        {
+            cout<<"Izlaz iz programa."<<endl;
+            break;
+        }
+        else
+        {
+            cout<<"Krivi unos."<<endl;
+        }
+        cout<<endl;
+        system("pause");
     }
     return 0;
 }
